@@ -9,14 +9,12 @@
 	 echo "Interrupt detected!"
 	 echo "Implementing signal trap..."
 	 echo "Cleaning up..."
-
-	 if [ -d "DIR_NAME"] then
-		 tar -czf "${DIR_NAME}_archive.tar.gz" "DIR_NAME"
-		 echo " Archive created: ${DIR_NAME}_archive.tar.gz"
-		 rm -rf "DIR_NAME"
+	 if [ -d "$DIR_NAME" ]; then
+		 tar -czf "${DIR_NAME}_archive.tar.gz" "$DIR_NAME"
+		 echo "Archive created: ${DIR_NAME}_archive.tar.gz"
+		 rm -rf "$DIR_NAME"
 		 echo"Incomplete directory deleted."
-
-	fi
+  	 fi
 
 	echo "Exiting."
 	exit 1
@@ -95,20 +93,21 @@ echo "Verifying directory structure..."
 if [ -d "$DIR_NAME" ] && \
    [ -d "$DIR_NAME/Helpers" ] && \
    [ -d "$DIR_NAME/reports" ] && \
+   [ -f "$DIR_NAME/attendance_checker.py" ] && \
    [ -f "$DIR_NAME/Helpers/assets.csv" ] && \
    [ -f "$DIR_NAME/Helpers/config.json" ] && \
    [ -f "$DIR_NAME/reports/reports.log" ]; then
-   echo "Directory structure verified successfully!"
-else 
-   echo "ERROR: Directory structure is incomplete."
-   exit 1
+    echo "Directory structure verified successfully!"
+else
+    echo "ERROR: Directory structure is incomplete!"
+    exit 1
 fi
-
 
 echo ""
 echo "Project setup complete!"
 echo "Directory: $DIR_NAME"
-echo "To run the tracker: cd $DIR_NAME && python3 attendance_checkers.py"
-echo "To trigger archive: Press Ctrl+C while the script is running"
+echo "To run the tracker: cd $DIR_NAME && python3 attendance_checker.py"
+echo "To trigger archive: Press Ctrl+C while script is running"
 echo ""
+
 
